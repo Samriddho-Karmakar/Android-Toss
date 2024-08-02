@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toss a Coin</title>
+    <link rel="icon" href="favicon.ico">
+    <style>
+        body {
+            background-color: #F38E4A;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .container {
+            background-color: inherit; /* Inherit background color from body */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            background-color: red;
+            color: white;
+            font-family: Elephant, sans-serif;
+            font-size: 20px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: darkred;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 50px;
+        }
+
+        #result img {
+            width: 100px;
+            height: 100px;
+        }
+
+        .blink {
+            animation: blink 0.5s steps(1, end) 3;
+        }
+
+        @keyframes blink {
+            50% {
+                background-color: black;
+                color: white;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Toss in progress please click the button!</h1>
+        <button id="tossButton">Click Me to Toss the Coin</button>
+        <div id="result"></div>
+    </div>
+    <audio id="headsSound" src="heads.mp3"></audio>
+    <audio id="tailsSound" src="tails.mp3"></audio>
+    <script>
+        document.getElementById('tossButton').addEventListener('click', function() {
+            const resultDiv = document.getElementById('result');
+            const headsSound = document.getElementById('headsSound');
+            const tailsSound = document.getElementById('tailsSound');
+            const random = Math.floor(Math.random() * 2);
+            const button = document.getElementById('tossButton');
+
+            // Add blink class to button
+            button.classList.add('blink');
+
+            // Remove blink class after animation ends
+            setTimeout(() => {
+                button.classList.remove('blink');
+            }, 1500);
+
+            resultDiv.innerHTML = '';
+
+            if (random === 0) {
+                document.body.style.backgroundColor = 'LightGrey';
+                document.querySelector('.container').style.backgroundColor = 'LightGrey';
+                resultDiv.innerHTML = "<img src='coin.png' alt='Heads'><p>It's Heads!</p>";
+                headsSound.play();
+            } else {
+                document.body.style.backgroundColor = 'LightGreen';
+                document.querySelector('.container').style.backgroundColor = 'LightGreen';
+                resultDiv.innerHTML = "<img src='coin1.png' alt='Tails'><p>It's Tails!</p>";
+                tailsSound.play();
+            }
+        });
+    </script>
+</body>
+</html>
